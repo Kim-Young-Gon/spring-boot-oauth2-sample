@@ -36,8 +36,8 @@ public class OAuth2Application {
 class OAuth2Configuration {
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dataSource() {
+    @ConfigurationProperties(prefix = "spring.datasource.oauth2")
+    public DataSource oauth2DataSource() {
         return DataSourceBuilder.create().build();
     }
 
@@ -54,7 +54,7 @@ class OAuth2Configuration {
     @Bean
     @Primary
     public JdbcClientDetailsService jdbcClientDetailsService() {
-        return new JdbcClientDetailsService(dataSource());
+        return new JdbcClientDetailsService(oauth2DataSource());
     }
 
 }

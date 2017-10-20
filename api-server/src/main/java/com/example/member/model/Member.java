@@ -1,4 +1,4 @@
-package com.example;
+package com.example.member.model;
 
 import lombok.Data;
 
@@ -11,14 +11,18 @@ import javax.persistence.Id;
 public class Member {
 	@Id
 	@GeneratedValue
-	Long id;
-	String name;
-	String username;
-	String remark;
+	private Long id;
+	private String name;
+	private String username;
+	private String password;
+	private String remark;
+
 	public Member() {}
-	public Member(String name, String username, String remark) {
+
+	public Member(String name, String username, String password, String remark) {
 		this.name = name;
 		this.username = username;
+		this.password = password;
 		this.remark = remark;
 	}
 }

@@ -1,5 +1,4 @@
 server.port: 8081
-
 # 외부 DB 설정시 아래의 주석을 활성화 시킨 후 관련 DB 설정 정보를 입력한다.
 spring:
   datasource:
@@ -7,7 +6,7 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password:
-
+    initialize: false
 security:
   oauth2:
     client:
@@ -15,7 +14,6 @@ security:
       client-secret: my_client_secret
     resource:
       jwt.key-uri: http://localhost:8080/oauth/token_key
-
 logging.level:
   org.springframework:
     security: debug

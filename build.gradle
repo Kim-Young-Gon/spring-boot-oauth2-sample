@@ -19,6 +19,7 @@ configure(allprojects) {
         lombokVersion = '1.16.10'
         apacheCommsVersion = '3.6'
         h2Version = '1.4.190'
+        javamelodyVersion = '1.69.0'
     }
 
     apply plugin: 'java'
@@ -56,6 +57,8 @@ project(':oauth2-server') {
 
         compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2'
         compile group: 'org.springframework.security', name: 'spring-security-jwt'
+
+        compile group: 'net.bull.javamelody', name: 'javamelody-core', version: javamelodyVersion
 
         testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     }

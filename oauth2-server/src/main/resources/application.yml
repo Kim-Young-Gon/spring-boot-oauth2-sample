@@ -1,25 +1,39 @@
 # 외부 DB 설정시 아래의 주석을 활성화 시킨 후 관련 DB 설정 정보를 입력한다.
-spring:
+oauth2:
   datasource:
+    url: jdbc:h2:tcp://localhost/~/test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
     initialize: false
-    oauth2:
-      url: jdbc:h2:tcp://localhost/~/test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-      driverClassName: org.h2.Driver
-      username: sa
-      password:
-    user:
-      url: jdbc:h2:tcp://localhost/~/api;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-      driverClassName: org.h2.Driver
-      username: sa
-      password:
-
+    tomcat:
+      initial-size: 5
+      min-idle: 5
+      max-idle: 10
+      max-active: 10
+      validation-query: select 1 from dual
+      test-while-idle: true
+      max-wait: 10000
+user:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/api;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+    initialize: false
+    tomcat:
+      initial-size: 5
+      min-idle: 5
+      max-idle: 10
+      max-active: 10
+      validation-query: select 1 from dual
+      test-while-idle: true
+      max-wait: 10000
 security:
   oauth2:
     authorization:
       token-key-access: isAuthenticated()
       check-token-access: isAuthenticated()
-
-
 logging.level:
   org.springframework:
     security: debug

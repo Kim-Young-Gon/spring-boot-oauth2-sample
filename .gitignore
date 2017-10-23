@@ -4,6 +4,7 @@
 *#
 *~
 /build
+out/
 /code
 .classpath
 .project

@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.service.UserDetailService;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.authserver.AuthorizationServerProperties;
@@ -21,8 +22,13 @@ public class JwtOAuth2AuthorizationServerConfiguration extends OAuth2Authorizati
     private ClientDetailsService clientDetailsService;
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserDetailService userDetailService;
 
-    public JwtOAuth2AuthorizationServerConfiguration(BaseClientDetails details, AuthenticationManager authenticationManager, ObjectProvider<TokenStore> tokenStoreProvider, AuthorizationServerProperties properties) {
+    public JwtOAuth2AuthorizationServerConfiguration(BaseClientDetails details,
+                                                     AuthenticationManager authenticationManager,
+                                                     ObjectProvider<TokenStore> tokenStoreProvider,
+                                                     AuthorizationServerProperties properties) {
         super(details, authenticationManager, tokenStoreProvider, properties);
     }
 
@@ -30,7 +36,9 @@ public class JwtOAuth2AuthorizationServerConfiguration extends OAuth2Authorizati
     public void configure(AuthorizationServerEndpointsConfigurer endpoints)
             throws Exception {
         super.configure(endpoints);
-        endpoints.authenticationManager(authenticationManager).accessTokenConverter(jwtAccessTokenConverter);
+        endpoints.authenticationManager(authenticationManager)
+                .accessTokenConverter(jwtAccessTokenConverter)
+                .userDetailsService(userDetailService);
     }
 
     @Override

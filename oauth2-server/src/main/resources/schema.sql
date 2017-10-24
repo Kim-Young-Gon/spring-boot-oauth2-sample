@@ -66,9 +66,16 @@ create table ClientDetails (
 );
 
 -- used in tests that use MySql
+-- version 확인
+SELECT VERSION();
+-- 설정값 확인
+show global variables like 'innodb_lar%';
+show global variables like 'innodb_fil%';
+-- 확인 후 값 설정
 SET GLOBAL INNODB_FILE_FORMAT_MAX=Barracuda;
 SET GLOBAL INNODB_FILE_FORMAT=Barracuda;
 SET GLOBAL INNODB_LARGE_PREFIX=ON;
+set global innodb_file_per_table=ON;
 
 create table oauth_client_details (
   client_id VARCHAR(256),

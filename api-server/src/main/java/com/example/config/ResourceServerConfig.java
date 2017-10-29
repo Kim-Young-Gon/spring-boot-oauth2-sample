@@ -12,7 +12,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().disable();
         http.authorizeRequests()
-                .antMatchers("/members").access("#oauth2.hasScope('read') and #oauth2.hasScope('ALL')")
+                .antMatchers("/members").access("#oauth2.hasScope('read') or #oauth2.hasScope('ALL')")
                 .antMatchers("/members/**").access("#oauth2.hasScope('write') or #oauth2.hasScope('ALL')")
 //				.antMatchers("/members", "/members/**").permitAll()
                 .anyRequest().authenticated();

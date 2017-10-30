@@ -42,7 +42,10 @@ public class OAuth2Configuration {
 
     @Bean
     public ExJwtAccessTokenConverter jwtAccessTokenConverter() {
-        return new ExJwtAccessTokenConverter();
+        ExJwtAccessTokenConverter tokenConverter = new ExJwtAccessTokenConverter();
+        // 키값을 지정하면 서버가 재기동 되어도 jwt token 을 decode 할 수 있음
+        tokenConverter.setSigningKey("my_app");
+        return tokenConverter;
     }
 
     @Bean

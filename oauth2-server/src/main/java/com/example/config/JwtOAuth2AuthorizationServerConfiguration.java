@@ -11,7 +11,6 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
-import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
@@ -19,10 +18,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 public class JwtOAuth2AuthorizationServerConfiguration extends OAuth2AuthorizationServerConfiguration {
     @Autowired
     private JwtAccessTokenConverter jwtAccessTokenConverter;
-    @Autowired
-    private TokenStore tokenStore;
-    @Autowired
-    private AuthorizationServerTokenServices tokenServices;
     @Autowired
     private ClientDetailsService clientDetailsService;
     @Autowired
@@ -42,8 +37,6 @@ public class JwtOAuth2AuthorizationServerConfiguration extends OAuth2Authorizati
             throws Exception {
         super.configure(endpoints);
         endpoints.authenticationManager(authenticationManager)
-                .tokenServices(tokenServices)
-                .tokenStore(tokenStore)
                 .accessTokenConverter(jwtAccessTokenConverter)
                 .userDetailsService(userDetailService);
     }

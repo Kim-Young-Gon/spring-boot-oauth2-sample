@@ -16,6 +16,7 @@ buildscript {
 
 configure(allprojects) {
     ext {
+        jwtVersion = '1.0.8.RELEASE'
         lombokVersion = '1.16.10'
         apacheCommsVersion = '3.6'
         h2Version = '1.4.190'
@@ -57,7 +58,7 @@ project(':oauth2-server') {
 //        providedCompile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat'
 
         compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2'
-        compile group: 'org.springframework.security', name: 'spring-security-jwt'
+        compile group: 'org.springframework.security', name: 'spring-security-jwt', version: jwtVersion
 
         compile group: 'net.bull.javamelody', name: 'javamelody-core', version: javamelodyVersion
 
@@ -72,7 +73,7 @@ project(':api-server') {
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
 
         compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2'
-        compile group: 'org.springframework.security', name: 'spring-security-jwt'
+        compile group: 'org.springframework.security', name: 'spring-security-jwt', version: jwtVersion
         compile group: 'org.springframework.data', name: 'spring-data-rest-hal-browser'
 
         testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'

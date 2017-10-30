@@ -12,14 +12,12 @@ import java.util.Map;
 public class ExJwtAccessTokenConverter extends JwtAccessTokenConverter {
     @Override
     public OAuth2AccessToken enhance(final OAuth2AccessToken accessToken, final OAuth2Authentication authentication) {
-        try {
+        // 로그인 처리가 된 경우에만 추가 정보 등록
+        if (authentication.getPrincipal() instanceof LoginUser) {
             LoginUser loginUser = (LoginUser) authentication.getPrincipal();
             final Map<String, Object> additionalInfo = new HashMap<>();
             additionalInfo.put("userId", loginUser.getUserId());
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
-        } catch (ClassCastException e) {
-            // 회원정보가 없는 경우 아무것도 하지 않음
-            // password 방식이 아닌경우에 대한 처리
         }
         return super.enhance(accessToken, authentication);
     }

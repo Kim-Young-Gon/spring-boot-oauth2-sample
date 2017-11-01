@@ -34,7 +34,15 @@ security:
     authorization:
       token-key-access: isAuthenticated()
       check-token-access: isAuthenticated()
-logging.level:
-  org.springframework:
-    security: debug
-    boot: debug
+jwttoken:
+  signingkey: JDJhJDEwJGhEdVE2VC9CVm1INjN3N3Fnd29nU3VyWjhGRmFkbVJQZHEuSzJrT09TUG5hOGJXeERrdUYy
+logging:
+#  file: D:\\ShareDir\\IntellijIDEA-Project\\NewsQ_API\\logs\\oauth2server.log
+  level:
+    org:
+      springframework:
+        security: debug
+        boot: debug
+      hibernate.SQL: debug
+      hibernate.type: trace
+

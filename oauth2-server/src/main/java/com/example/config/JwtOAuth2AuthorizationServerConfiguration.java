@@ -25,15 +25,15 @@ public class JwtOAuth2AuthorizationServerConfiguration extends OAuth2Authorizati
     @Autowired
     private UserDetailService userDetailService;
 
-    public JwtOAuth2AuthorizationServerConfiguration(BaseClientDetails details,
-                                                     AuthenticationManager authenticationManager,
-                                                     ObjectProvider<TokenStore> tokenStoreProvider,
-                                                     AuthorizationServerProperties properties) {
+    public JwtOAuth2AuthorizationServerConfiguration(final BaseClientDetails details,
+                                                     final AuthenticationManager authenticationManager,
+                                                     final ObjectProvider<TokenStore> tokenStoreProvider,
+                                                     final AuthorizationServerProperties properties) {
         super(details, authenticationManager, tokenStoreProvider, properties);
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints)
+    public void configure(final AuthorizationServerEndpointsConfigurer endpoints)
             throws Exception {
         super.configure(endpoints);
         endpoints.authenticationManager(authenticationManager)
@@ -42,7 +42,7 @@ public class JwtOAuth2AuthorizationServerConfiguration extends OAuth2Authorizati
     }
 
     @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+    public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
         clients.withClientDetails(clientDetailsService);
     }
 }

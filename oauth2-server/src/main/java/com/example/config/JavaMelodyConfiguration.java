@@ -17,7 +17,7 @@ import javax.servlet.ServletException;
 @Configuration
 public class JavaMelodyConfiguration implements ServletContextInitializer {
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
+    public void onStartup(final ServletContext servletContext) throws ServletException {
         servletContext.addListener(new SessionListener());
     }
 
@@ -48,7 +48,7 @@ public class JavaMelodyConfiguration implements ServletContextInitializer {
      */
     @Bean
     public SpringDataSourceBeanPostProcessor monitoringDataSourceBeanPostProcessor() {
-        SpringDataSourceBeanPostProcessor processor = new SpringDataSourceBeanPostProcessor();
+        final SpringDataSourceBeanPostProcessor processor = new SpringDataSourceBeanPostProcessor();
         processor.setExcludedDatasources(null);
         return processor;
     }

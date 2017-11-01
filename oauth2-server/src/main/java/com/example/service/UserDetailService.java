@@ -17,17 +17,17 @@ public class UserDetailService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+        final User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("Username not found.[%s]", username));
         }
-        LoginUser loginUser = createUser(user);
+        final LoginUser loginUser = createUser(user);
         return loginUser;
     }
 
     private LoginUser createUser(final User user) {
-        LoginUser loginUser = new LoginUser(user);
+        final LoginUser loginUser = new LoginUser(user);
         loginUser.setRoles(Arrays.asList("ROLE_USER"));
         return loginUser;
     }

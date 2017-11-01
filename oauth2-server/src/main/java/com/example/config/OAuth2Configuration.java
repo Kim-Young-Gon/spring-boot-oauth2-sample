@@ -42,7 +42,7 @@ public class OAuth2Configuration {
 
     @Bean
     public ExJwtAccessTokenConverter jwtAccessTokenConverter() {
-        ExJwtAccessTokenConverter tokenConverter = new ExJwtAccessTokenConverter();
+        final ExJwtAccessTokenConverter tokenConverter = new ExJwtAccessTokenConverter();
         // 키값을 지정하면 서버가 재기동 되어도 jwt token 을 decode 할 수 있음
         tokenConverter.setSigningKey("my_app");
         return tokenConverter;
@@ -77,10 +77,10 @@ public class OAuth2Configuration {
     @Bean
     @Qualifier("user")
     public LocalContainerEntityManagerFactoryBean userEntityManager() {
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(userDataSource());
         entityManagerFactoryBean.setPackagesToScan(new String[] {"com.example.user.model"});
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
         return entityManagerFactoryBean;
     }
@@ -88,7 +88,7 @@ public class OAuth2Configuration {
     @Bean
     @Qualifier("user")
     public PlatformTransactionManager userTransactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        final JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(userEntityManager().getObject());
         return transactionManager;
     }

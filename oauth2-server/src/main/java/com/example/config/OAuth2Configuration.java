@@ -3,6 +3,7 @@ package com.example.config;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,9 +26,6 @@ import javax.sql.DataSource;
         transactionManagerRef = "userTransactionManager"
 )
 public class OAuth2Configuration {
-    @Value("${jwttoken.signingkey}")
-    private String SIGNING_KEY;
-
     @Primary
     @Bean
     @ConfigurationProperties(prefix = "oauth2.datasource")
@@ -45,16 +43,16 @@ public class OAuth2Configuration {
     }
 
     @Bean
-    public ExJwtAccessTokenConverter jwtAccessTokenConverter() {
+    public ExJwtAccessTokenConverter jwtAccessTokenConverter(ResourceServerProperties properties) {
         final ExJwtAccessTokenConverter tokenConverter = new ExJwtAccessTokenConverter();
         // 키값을 지정하면 서버가 재기동 되어도 jwt token 을 decode 할 수 있음
-        tokenConverter.setSigningKey(SIGNING_KEY);
+        tokenConverter.setSigningKey(properties.getJwt().getKeyValue());
         return tokenConverter;
     }
 
     @Bean
-    public TokenStore tokenStore() {
-        return new JwtTokenStore(jwtAccessTokenConverter());
+    public TokenStore tokenStore(ExJwtAccessTokenConverter jwtAccessTokenConverter) {
+        return new JwtTokenStore(jwtAccessTokenConverter);
     }
 
     @Primary

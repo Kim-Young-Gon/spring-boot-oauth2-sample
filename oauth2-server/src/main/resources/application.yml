@@ -34,8 +34,9 @@ security:
     authorization:
       token-key-access: isAuthenticated()
       check-token-access: isAuthenticated()
-jwttoken:
-  signingkey: JDJhJDEwJGhEdVE2VC9CVm1INjN3N3Fnd29nU3VyWjhGRmFkbVJQZHEuSzJrT09TUG5hOGJXeERrdUYy
+    resource:
+      jwt:
+        key-value: JDJhJDEwJGhEdVE2VC9CVm1INjN3N3Fnd29nU3VyWjhGRmFkbVJQZHEuSzJrT09TUG5hOGJXeERrdUYy
 logging:
 #  file: D:\\ShareDir\\IntellijIDEA-Project\\NewsQ_API\\logs\\oauth2server.log
   level:

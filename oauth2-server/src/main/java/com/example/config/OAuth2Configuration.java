@@ -1,7 +1,7 @@
 package com.example.config;
 
+import com.example.endpoint.ClientManageEndpoint;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -60,6 +60,18 @@ public class OAuth2Configuration {
     @Qualifier("primary")
     public JdbcClientDetailsService jdbcClientDetailsService() {
         return new JdbcClientDetailsService(oauth2DataSource());
+    }
+
+    /**
+     * Custom endpoint 추가
+     * UserDetailService에서 권한관리 됨
+     * @return
+     */
+    @Primary
+    @Bean
+    @Qualifier("primary")
+    public ClientManageEndpoint clientManageEndpoint() {
+        return new ClientManageEndpoint(jdbcClientDetailsService());
     }
 
     @Bean

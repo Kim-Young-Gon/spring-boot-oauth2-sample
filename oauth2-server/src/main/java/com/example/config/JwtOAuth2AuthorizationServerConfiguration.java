@@ -36,7 +36,9 @@ public class JwtOAuth2AuthorizationServerConfiguration extends OAuth2Authorizati
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints)
             throws Exception {
         super.configure(endpoints);
-        endpoints.authenticationManager(authenticationManager)
+        // OAuth2 기본 Url을 별도로 구현한 경우 해당 매핑으로 변경 시 pathMapping 을 사용한다.
+        endpoints//.pathMapping("/oauth/token_key", "/oauth/tonek_key")
+                .authenticationManager(authenticationManager)
                 .accessTokenConverter(jwtAccessTokenConverter)
                 .userDetailsService(userDetailService);
     }

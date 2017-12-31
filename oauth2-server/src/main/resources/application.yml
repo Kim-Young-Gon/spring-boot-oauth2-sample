@@ -38,7 +38,7 @@ security:
       jwt:
         key-value: JDJhJDEwJGhEdVE2VC9CVm1INjN3N3Fnd29nU3VyWjhGRmFkbVJQZHEuSzJrT09TUG5hOGJXeERrdUYy
 logging:
-#  file: D:\\ShareDir\\IntellijIDEA-Project\\NewsQ_API\\logs\\oauth2server.log
+#  file: C:\\logs\\oauth2server.log
   level:
     org:
       springframework:

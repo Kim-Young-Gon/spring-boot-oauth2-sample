@@ -1,4 +1,4 @@
-rootProject.name = 'demo'
+rootProject.name = 'demo-oauth2'
 include 'oauth2-server'
 include 'api-server'
 include 'h2-server'

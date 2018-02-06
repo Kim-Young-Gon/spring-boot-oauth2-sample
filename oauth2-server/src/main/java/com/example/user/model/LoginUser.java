@@ -19,10 +19,10 @@ public class LoginUser implements UserDetails {
 
     public LoginUser() {}
 
-    public LoginUser(final User user) {
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.userId = user.getId();
+    public LoginUser(final UserRs userRs) {
+        this.username = userRs.getUsername();
+        this.password = userRs.getPassword();
+        this.userId = userRs.getId();
     }
 
     @Override

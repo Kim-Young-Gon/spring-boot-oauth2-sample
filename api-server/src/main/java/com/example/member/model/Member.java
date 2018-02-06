@@ -2,27 +2,27 @@ package com.example.member.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 public class Member {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String username;
-	private String password;
 	private String remark;
+
+	@OneToMany(mappedBy = "member")
+	private List<MemberEx> memberExs;
 
 	public Member() {}
 
-	public Member(String name, String username, String password, String remark) {
+	public Member(String name, String username, String remark) {
 		this.name = name;
 		this.username = username;
-		this.password = password;
 		this.remark = remark;
 	}
 }

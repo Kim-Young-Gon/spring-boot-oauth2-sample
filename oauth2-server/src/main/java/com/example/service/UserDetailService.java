@@ -20,9 +20,11 @@ public class UserDetailService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    private final String SPLIT_STR = ";;";
+
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        final String[] params = username.split(";;");
+        final String[] params = username.split(SPLIT_STR);
         String usertypeParam = "N";
         String usernameParam = params[0];
         if (params != null && 1 < params.length) {
@@ -40,7 +42,7 @@ public class UserDetailService implements UserDetailsService {
         final UserRs userRs = new UserRs();
         userRs.setId(user.getId());
         userRs.setName(user.getName());
-        userRs.setUsername(user.getUsername());
+        userRs.setUsername(user.getUsername() + SPLIT_STR + usertype);
         userRs.setRemark(user.getRemark());
         final Optional<List<UserEx>> optionalUserExes = Optional.ofNullable(user.getMemberExs());
         if (optionalUserExes.isPresent()) {
